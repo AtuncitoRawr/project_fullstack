@@ -2,6 +2,8 @@
 Para la asignatura de Desarrolo Fullstack I se nos pidió el crear un sistema de gestión basado en microservicios para la compañia "Perfulandia SPA",
 a continuacion se muestra cada paso que se siguió durante el proyecto.
 
+[![Licencia MIT](https://img.shields.io/badge/licencia-MIT-blue)](LICENSE)
+[![Estado](https://img.shields.io/badge/estado-en%20desarrollo-yellow)](https://github.com/AtuncitoRawr/project_fullstack)
 
 # 🛒 Perfulandia SPA - Sistema de Microservicios 
 

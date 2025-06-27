@@ -94,8 +94,6 @@ Proyecto académico desarrollado para **DUOC UC** (curso Desarrollo Fullstack I)
 
 
 ## 🧪 Pruebas
-## 🧪 Pruebas y Documentación Técnica
-
 ### ✅ Pruebas Unitarias
 
 Durante el desarrollo de los microservicios se realizaron pruebas unitarias para asegurar el correcto funcionamiento de los controladores y servicios. Se utilizaron las siguientes herramientas:

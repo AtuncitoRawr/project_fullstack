@@ -92,15 +92,64 @@ Proyecto académico desarrollado para **DUOC UC** (curso Desarrollo Fullstack I)
 
 ---
 
-## 🧪 Pruebas
-### Unitarias (JUnit)
-java
-@Test
-void testCrearProducto() {
-    Producto p = new Producto("Laptop", 999.99);
-    assertNotNull(repository.save(p));
-}
 
+## 🧪 Pruebas
+## 🧪 Pruebas y Documentación Técnica
+
+### ✅ Pruebas Unitarias
+
+Durante el desarrollo de los microservicios se realizaron pruebas unitarias para asegurar el correcto funcionamiento de los controladores y servicios. Se utilizaron las siguientes herramientas:
+
+- **JUnit**: Para la creación y ejecución de las pruebas unitarias.
+- **Spring MockMvc**: Para simular peticiones HTTP a los controladores sin necesidad de desplegar el servidor.
+- **Jackson ObjectMapper**: Para la serialización y deserialización de objetos Java a JSON y viceversa durante las pruebas.
+
+Las pruebas incluyeron distintos escenarios como:
+
+- Búsqueda de recursos por ID.
+- Validación de respuestas correctas para recursos inexistentes.
+- Confirmación de los códigos de estado HTTP esperados.
+
+Todos los tests se ejecutaron exitosamente, verificando el comportamiento esperado de cada endpoint.
+
+---
+
+### 📖 Documentación OpenAPI (Swagger)
+
+Se integró **Springdoc OpenAPI** para la documentación de la API REST. Esto permite una visualización interactiva de todos los endpoints disponibles, sus parámetros, respuestas y métodos HTTP.
+
+La documentación está disponible mientras el servicio está corriendo en el siguiente enlace:
+
+- **Swagger UI**:  
+`http://localhost:8080/swagger-ui/index.html`
+
+Esto facilita la consulta, prueba y validación de los servicios expuestos por los microservicios.
+
+---
+### 🔗 HATEOAS - Navegabilidad de la API
+
+Siguiendo el principio **HATEOAS (Hypermedia as the Engine of Application State)**, las respuestas de los endpoints incluyen enlaces relevantes que permiten la navegación entre recursos relacionados.
+
+Ejemplo de una respuesta típica de la API para un usuario con ID `3`:
+
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/api/v1/usuarios/3"
+    },
+    "usuarios": {
+      "href": "http://localhost:8080/api/v1/usuarios"
+    },
+    "eliminar": {
+      "href": "http://localhost:8080/api/v1/usuarios/3"
+    },
+    "actualizar": {
+      "href": "http://localhost:8080/api/v1/usuarios/3"
+    }
+  }
+}
+```
 ## 🛠 Tecnologías
 | Categoría | Tecnologías |
 |-----------|-------------|
@@ -127,6 +176,11 @@ MIT © 2025 - Equipo Perfulandia.
 *Documentación académica para DUOC UC.*
 
 ---
+
+## 🔗 Enlaces Relevantes
+- [Trello](https://trello.com/b/paFBHqLO/proyecto-fullstack-perfulandia)
+- [Repositorio](https://github.com/AtuncitoRawr/project_fullstack)
+```
 
 ## 🔗 Enlaces Relevantes
 - [Trello](https://trello.com/b/paFBHqLO/proyecto-fullstack-perfulandia)

@@ -3,6 +3,8 @@ package com.perfulandia.envios;
 import com.perfulandia.envios.model.Envio;
 import com.perfulandia.envios.repository.EnvioRepository;
 import com.perfulandia.envios.service.EnvioService;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -22,8 +24,16 @@ public class EnvioServiceTest {
     @InjectMocks
     private EnvioService envioService;
 
-    public EnvioServiceTest() {
-        MockitoAnnotations.openMocks(this);
+    private AutoCloseable closeable; // para cerrar mockitos y evitar fuga de memoria
+
+    @BeforeEach
+    void setUp() {
+        closeable = MockitoAnnotations.openMocks(this);
+    }
+
+    @AfterEach
+    void tearDown() throws Exception {
+        closeable.close(); // se cierra correctamente sin warning
     }
 
     @Test
@@ -66,14 +76,14 @@ public class EnvioServiceTest {
 
     @Test
     void testEliminar() {
-        when(envioRepository.existsById(1L)).thenReturn(true);  // Simula que existe
+        when(envioRepository.existsById(1L)).thenReturn(true);
         envioService.eliminar(1L);
         verify(envioRepository).deleteById(1L);
     }
 
     @Test
     void testEliminarNoExiste() {
-        when(envioRepository.existsById(2L)).thenReturn(false);  // Simula que no existe
+        when(envioRepository.existsById(2L)).thenReturn(false);
         boolean resultado = envioService.eliminar(2L);
         assertFalse(resultado);
         verify(envioRepository, never()).deleteById(anyLong());

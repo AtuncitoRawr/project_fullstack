@@ -24,7 +24,7 @@ public class EnvioServiceTest {
     @InjectMocks
     private EnvioService envioService;
 
-    private AutoCloseable closeable; // para cerrar mockitos y evitar fuga de memoria
+    private AutoCloseable closeable;
 
     @BeforeEach
     void setUp() {
@@ -33,7 +33,7 @@ public class EnvioServiceTest {
 
     @AfterEach
     void tearDown() throws Exception {
-        closeable.close(); // se cierra correctamente sin warning
+        closeable.close();
     }
 
     @Test

@@ -36,7 +36,7 @@ public class UsuariosServiceTest {
         usuario.setCorreo_usuario("juan@example.com");
         usuario.setTelefono_usuario("123456789");
         usuario.setDireccion_usuario("Calle Falsa 123");
-        usuario.setContraseña_usuario("secreta");
+        usuario.setContrasenia_usuario("secreta");
     }
 
     @Test
@@ -75,7 +75,7 @@ public class UsuariosServiceTest {
         verify(passwordEncoder).encode("secreta");
         verify(usuariosRepository).save(usuario);
 
-        assertEquals("encrypted-password", resultado.getContraseña_usuario());
+        assertEquals("encrypted-password", resultado.getContrasenia_usuario());
     }
 
     @Test

@@ -61,7 +61,7 @@ public class UsuariosControllerTest {
         usuario.setCorreo_usuario("juan@example.com");
         usuario.setTelefono_usuario("123456789");
         usuario.setDireccion_usuario("Calle Falsa 123");
-        usuario.setContraseña_usuario("secreta");
+        usuario.setContrasenia_usuario("secreta");
         return usuario;
     }
 

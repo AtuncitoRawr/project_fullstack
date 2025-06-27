@@ -32,9 +32,9 @@ public class DataLoader implements CommandLineRunner {
             usuario.setTelefono_usuario(faker.phoneNumber().cellPhone());
 
             // Generar y codificar la contraseña
-            String contraseñaPlana = faker.internet().password();
-            String contraseñaCodificada = passwordEncoder.encode(contraseñaPlana);
-            usuario.setContraseña_usuario(contraseñaCodificada);
+            String contraseniaPlana = faker.internet().password();
+            String contraseniaCodificada = passwordEncoder.encode(contraseniaPlana);
+            usuario.setContrasenia_usuario(contraseniaCodificada);
 
             usuariosRepository.save(usuario);
         }

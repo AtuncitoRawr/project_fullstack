@@ -31,9 +31,9 @@ public class UsuariosService {
     // Guardar un nuevo usuario (o actualizar) con cifrado de contraseña
     public Usuarios save(Usuarios usuario) {
         // Si es un nuevo usuario o si se está actualizando la contraseña
-        if (usuario.getContraseña_usuario() != null && !usuario.getContraseña_usuario().startsWith("$2a$")) {
-            String contraseñaCodificada = passwordEncoder.encode(usuario.getContraseña_usuario());
-            usuario.setContraseña_usuario(contraseñaCodificada);
+        if (usuario.getContrasenia_usuario() != null && !usuario.getContrasenia_usuario().startsWith("$2a$")) {
+            String contraseñaCodificada = passwordEncoder.encode(usuario.getContrasenia_usuario());
+            usuario.setContrasenia_usuario(contraseñaCodificada);
         }
         return usuariosRepository.save(usuario);
     }

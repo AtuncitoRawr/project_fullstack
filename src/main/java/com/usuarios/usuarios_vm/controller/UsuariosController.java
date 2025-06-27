@@ -97,7 +97,7 @@ public class UsuariosController {
             existente.setCorreo_usuario(usuario.getCorreo_usuario());
             existente.setDireccion_usuario(usuario.getDireccion_usuario());
             existente.setTelefono_usuario(usuario.getTelefono_usuario());
-            existente.setContraseña_usuario(usuario.getContraseña_usuario());
+            existente.setContrasenia_usuario(usuario.getContrasenia_usuario());
 
             Usuarios actualizado = usuariosService.save(existente);
             return ResponseEntity.ok(assembler.toModel(actualizado));

@@ -39,7 +39,7 @@ public class Usuarios {
 
     @Column(nullable = false)
     @Schema(description = "Contraseña del usuario", example = "contraseña123")
-    private String contraseña_usuario;
+    private String contrasenia_usuario;
 
     @Column(nullable = false)
     @Schema(description = "Dirección del usuario", example = "Av. Los Leones 123, Santiago")

@@ -2,6 +2,7 @@ package com.perfulandia.envios.controller;
 
 import com.perfulandia.envios.model.Envio;
 import com.perfulandia.envios.service.EnvioService;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,16 @@ public class EnvioController {
     }
 
     @GetMapping
-    public List<Envio> obtenerTodos() {
-        return envioService.listarTodos();
+    public CollectionModel<EntityModel<Envio>> obtenerTodos() {
+        List<Envio> lista = envioService.listarTodos();
+
+        List<EntityModel<Envio>> recursos = lista.stream()
+                .map(envio -> EntityModel.of(envio,
+                        linkTo(methodOn(EnvioController.class).obtenerPorId(envio.getId())).withSelfRel()))
+                .toList();
+
+        return CollectionModel.of(recursos,
+                linkTo(methodOn(EnvioController.class).obtenerTodos()).withSelfRel());
     }
 
     @GetMapping("/{id}")
@@ -38,28 +47,56 @@ public class EnvioController {
     }
 
     @GetMapping("/estado/{estado}")
-    public List<Envio> obtenerPorEstado(@PathVariable String estado) {
-        return envioService.listarPorEstado(estado);
+    public CollectionModel<EntityModel<Envio>> obtenerPorEstado(@PathVariable String estado) {
+        List<Envio> lista = envioService.listarPorEstado(estado);
+
+        List<EntityModel<Envio>> recursos = lista.stream()
+                .map(envio -> EntityModel.of(envio,
+                        linkTo(methodOn(EnvioController.class).obtenerPorId(envio.getId())).withSelfRel()))
+                .toList();
+
+        return CollectionModel.of(recursos,
+                linkTo(methodOn(EnvioController.class).obtenerPorEstado(estado)).withSelfRel());
     }
 
     @GetMapping("/pedido/{pedidoId}")
-    public List<Envio> obtenerPorPedido(@PathVariable Long pedidoId) {
-        return envioService.listarPorPedidoId(pedidoId);
+    public CollectionModel<EntityModel<Envio>> obtenerPorPedido(@PathVariable Long pedidoId) {
+        List<Envio> lista = envioService.listarPorPedidoId(pedidoId);
+
+        List<EntityModel<Envio>> recursos = lista.stream()
+                .map(envio -> EntityModel.of(envio,
+                        linkTo(methodOn(EnvioController.class).obtenerPorId(envio.getId())).withSelfRel()))
+                .toList();
+
+        return CollectionModel.of(recursos,
+                linkTo(methodOn(EnvioController.class).obtenerPorPedido(pedidoId)).withSelfRel());
     }
 
     @PostMapping
-    public Envio crear(@RequestBody Envio envio) {
-        return envioService.guardar(envio);
+    public ResponseEntity<EntityModel<Envio>> crear(@RequestBody Envio envio) {
+        Envio creado = envioService.guardar(envio);
+        EntityModel<Envio> recurso = EntityModel.of(creado,
+                linkTo(methodOn(EnvioController.class).obtenerPorId(creado.getId())).withSelfRel(),
+                linkTo(methodOn(EnvioController.class).obtenerTodos()).withRel("todos-los-envios"));
+        return ResponseEntity.created(linkTo(methodOn(EnvioController.class).obtenerPorId(creado.getId())).toUri()).body(recurso);
     }
 
     @PutMapping("/{id}")
-    public Envio actualizar(@PathVariable Long id, @RequestBody Envio envio) {
-        return envioService.actualizar(id, envio);
+    public ResponseEntity<EntityModel<Envio>> actualizar(@PathVariable Long id, @RequestBody Envio envio) {
+        Envio actualizado = envioService.actualizar(id, envio);
+        EntityModel<Envio> recurso = EntityModel.of(actualizado,
+                linkTo(methodOn(EnvioController.class).obtenerPorId(actualizado.getId())).withSelfRel(),
+                linkTo(methodOn(EnvioController.class).obtenerTodos()).withRel("todos-los-envios"));
+        return ResponseEntity.ok(recurso);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
-        envioService.eliminar(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        boolean eliminado = envioService.eliminar(id);
+        if (eliminado) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

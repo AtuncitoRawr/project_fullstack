@@ -47,7 +47,11 @@ public class EnvioService {
         }).orElseThrow(() -> new RuntimeException("Envío no encontrado"));
     }
 
-    public void eliminar(Long id) {
-        envioRepository.deleteById(id);
+    public boolean eliminar(Long id) {
+        if(envioRepository.existsById(id)) {
+            envioRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

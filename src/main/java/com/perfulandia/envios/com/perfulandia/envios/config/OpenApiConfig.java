@@ -1,7 +1,7 @@
 package com.perfulandia.envios.config;
 
-import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,8 +12,8 @@ public class OpenApiConfig {
     public OpenAPI apiInfo() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API de Envíos")
-                        .description("Documentación de la API para el CRUD de envíos")
+                        .title("API de Envios")
+                        .description("Documentación de la API de gestión de envíos")
                         .version("1.0"));
     }
 }
